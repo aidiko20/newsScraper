@@ -63,5 +63,12 @@ app.delete("/api/headlines/:id", function (req, res) {
 app.get("/api/scrape", function (req, res) {
     axios.get("https://www.jpl.nasa.gov/news/").then(function (response) {
         var $ = cheerio.load(response.data);
+        $(".image_and_description_container").each(function(i, element) {
+            var result = {};
+            result.title = $(this)
+            .children(".list_text_content")
+            .children(".content_title")
+            .text().trim();
+        })
     })
 })
