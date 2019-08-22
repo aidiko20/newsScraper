@@ -18,19 +18,20 @@ app.use(express.json());
 var exphbs = require ("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-app.listen(PORT, function(){
-    console.log("Server listening on: http://localhost:" + PORT);
-});
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+var db = require("./models");
+
 
 // Routes
 
 app.get("/", function (req, res) {
     db.Article.find({saved: false}, function (err, data) {
-        res.render("home", {home: true, article: data});
+        res.render("main", {home: true, article: data});
     })
 });
 
-app.get("/saved", function (reeq, res) {
+app.get("/saved", function (req, res) {
     db.Article.find({saved: true}, function(err, data) {
         res.render("saved", {home: false, article: data});
     })
@@ -69,6 +70,29 @@ app.get("/api/scrape", function (req, res) {
             .children(".list_text_content")
             .children(".content_title")
             .text().trim();
-        })
-    })
-})
+            result.image = $(this)
+            .children(".image_and_description_container")
+            .children("a")
+            .attr("href");
+            result.summary = $(this)
+            .children(".list_text_content")
+            .children(".article_teaser_body")
+            .text();
+            result.link = $(this)
+            .chilren("a")
+            .attr("href");
+            
+            db.Article.create(result)
+            .then(function(dbArticle) {
+                console.log(dbArticle);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+        });
+        res.send("Scrape Complete");
+    });
+});
+app.listen(PORT, function(){
+    console.log("Server listening on: http://localhost:" + PORT);
+});
