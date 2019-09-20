@@ -1,42 +1,14 @@
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">NASA NEWS SCRAPER</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Saved Articles</a>
-                </li>
-                {{!-- {{#if home}} --}}
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="srape">Scrape New Articles</button>
-               {{!-- {{/if}} --}}
-                <button class="btn btn-outline-success my-2 my-sm-0" type="clear">Clear Articles</button>
-            </form>
-            </ul>
+    {{#each articles}}
+    <div class="row mb-2" id="index-content">
+        <div class="col bg-light p-2 border">
+            <img class="img-thubnail rounder float-left mr-3 mb-3 img-cover" src="{{image}}">
+            <h3>{{titile}}</h3>
+            <button data-id="{{_id}}" class="btn btn-success save activle">Save Article</button>
         </div>
-    </nav>
-</div>
-<div class="container"> 
-  <div class="jumbotron">
-      {{!-- {{#if}} --}}
-  <h1 class="display-4">Mongo Scraper!</h1>
-  <p class="lead">NASA News Edition</p>
-  {{!-- {{else}} --}}
-    <h1 class="display-4">Saved Articles</h1>
-  <p class="lead">Your NASA Saved Articles</p>
-</div>
-</div>
-
-<div class="container">
-<nav class="navbar fixed-bottom navbar-light bg-light">
-    <a class="navbar-brand" href="#">NASA News Scraper</a>
-</nav>
+    </div>
+    {{/each}}
+    {{#unless acticles}}
+    <h3 class="text-center"> There are not articles! Try again.</h3>
+    {{/unless}}
 </div>
