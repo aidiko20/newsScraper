@@ -31,7 +31,7 @@ router.get("/saved", function (req, res) {
     });
 })
 
-router.get("/scrape", function (req, res) {
+router.get("/", function (req, res) {
     axios.get("https://www.jpl.nasa.gov/news/")
     .then(function (response) {
         var $ = cheerio.load(response.data);
@@ -94,7 +94,7 @@ router.post("/headlines/:id", function (req, res) {
 router.delete("/headlines/:articleId/note/:noteId", function (req, res) {
     db.Note.deleteOne({_id: req.params.noteId })
     .then(function () {
-        return db.Article.update({ _id: req.params.articleId}, {$pull: {comments: req.params.noteId} });
+        return db.Article.update({ _id: req.params.articleId}, {$pull: {notes: req.params.noteId} });
     })
     .then(function (dbArticle) {
         res.json(dbArticle);
