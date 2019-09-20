@@ -2,26 +2,35 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Scrape all that!</title>
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script src="/assets/javascript/index.js"></script>
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
-	<link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Scrape all that!</title>
+    {{!-- Bootstrap CSS CDN--}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {{!-- jQuery CDN --}}
+    <script src="https://code.jquery.com/jquery.js"></script>
+    {{!-- Bootstrap JavaScript CDN --}}
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    {{!-- Own JavaScript --}}
+    <script src="/assets/javascript/index.js"></script>
+    {{!-- Awesom fonts --}}
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    {{!-- Own CSS --}}
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+    {{!-- Goole fonts --}}
+    <link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg" id="mynavbar">
         <a class="navbar-brand" href="#">NASA NEWS SCRAPER</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -29,22 +38,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="">Saved Articles</a>
                 </li>
-                {{#if home}}
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="srape">Scrape New Articles</button>
-               {{/if}}
-                <button class="btn btn-outline-success my-2 my-sm-0" type="clear">Clear Articles</button>
-            </form>
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="srape">Scrape New Articles</button>
+                    &nbsp&nbsp
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="clear">Clear Articles</button>
+                </form>
             </ul>
-        </div>
     </nav>
-</div>
-	<div class="container"></div>
-	<nav class="navbar fixed-bottom navbar-light bg-light">
-		<a class="navbar-brand" href="#">NASA News Scraper</a>
-	</nav>
-	</div>
-		{{{ body }}}
+    </div>
+    <div class="jumbotron text-center">
+        <h1>NASA News Scrapper</h1>
+        <h5>The latest NASA News</h5>
+    </div>
+    {{{ body }}}
 </body>
 
 </html>

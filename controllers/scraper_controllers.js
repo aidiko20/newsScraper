@@ -1,13 +1,13 @@
-const express = require("express");
-const router = epress.Router();
-const axios = require("axios");
-const cheerio = require("cheerio");
-const db = require("../models");
+var express = require("express");
+var router = express.Router();
+var axios = require("axios");
+var cheerio = require("cheerio");
+var db = require("../models");
 
 router.get("/", function (req, res) {
     db.Article.find({ "saved" : false}).sort({_id: -1}).limit(10)
     .then(function (dbArticle) {
-        const hbsObject = {
+        var hbsObject = {
             articles: dbArticle
         };
         res.render("index", hbsObject);
@@ -21,7 +21,7 @@ router.get("/saved", function (req, res) {
     db.Article.find({ "saved": true}).sort({_id: -1})
     .populate("comments")
     .then(function (dbArticle) {
-        const hbsObject ={
+        var hbsObject ={
             articles: dbArticle
         };
         res.render("saved", hbsObject);
@@ -32,9 +32,9 @@ router.get("/saved", function (req, res) {
 })
 
 router.get("/scrape", function (req, res) {
-    axios.get("https://www.jpl.nasa.gov/news/").then(function (response) {
+    axios.get("https://www.jpl.nasa.gov/news/")
+    .then(function (response) {
         var $ = cheerio.load(response.data);
-        var previewLenght = 400;
         $(".image_and_description_container").each(function(i, element) {
             var result = {};
             result.title = $(this)
@@ -49,18 +49,17 @@ router.get("/scrape", function (req, res) {
             .children(".list_text_content")
             .children(".article_teaser_body")
             .text();
-            result.link = "https://www.jpl.nasa.gov/news/" + $(this)
-            .chilren("a")
+            result.link = $(this)
+            .children("a")
             .attr("href");
 
-            result.review = result.review.substring(0, previewLenght);
             
-            db.Article.create(result)
-            .then(function(dbArticle) {
-                renderHeadlines();
+            db.Article.create(req, res)
+            .then(function (dbArticle) {
+                console.log(dbArticle);
             })
             .catch(function (err) {
-                renderHeadlines()
+                // renderHeadlines()
                 console.log(err);
             });
         });

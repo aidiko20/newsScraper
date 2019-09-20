@@ -3,12 +3,12 @@
     <div class="row mb-2" id="index-content">
         <div class="col bg-light p-2 border">
             <img class="img-thubnail rounder float-left mr-3 mb-3 img-cover" src="{{image}}">
-            <h3>{{titile}}</h3>
-            <button data-id="{{_id}}" class="btn btn-success save activle">Save Article</button>
+            <h3>{{title}}</h3>
+            <button data-id="{{_id}}" class="btn btn-info save activle">Save Article</button>
         </div>
     </div>
     {{/each}}
-    {{#unless acticles}}
+    {{#unless articles}}
     <h3 class="text-center"> There are not articles! Try again.</h3>
     {{/unless}}
 </div>

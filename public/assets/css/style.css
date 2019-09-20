@@ -1,3 +1,9 @@
 .jumbotron {
-    background-image: url(https://www.nasa.gov/sites/default/files/thumbnails/image/discover_missions_banner.jpg)
+    background-image: url("../images/discover_missions_banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color:rgb(233, 17, 17);
+}
+#mynavbar {
+    background-color: rgb(1, 51, 95);
 }
