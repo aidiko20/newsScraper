@@ -9,7 +9,7 @@ var scrape = function (cb) {
         var articles = [];
         $(".image_and_description_container").each( function( i, element) {
             var head = $ (this).children(".list_text_content").children(".content_title").text().trim();
-            var img = $(this).children(".image_and_description_container").children("a").attr("href");
+            var img = $(this).children("a").attr("href");
             var sum = $(this).children(".list_text_content").children(".article_teaser_body").text().trim();
             var link = $(this).children("a").attr("href");
 
@@ -19,7 +19,10 @@ var scrape = function (cb) {
 
                 var dataToAdd = {
                     title: headNeat,
-                    summary: sumNeat
+                    summary: sumNeat,
+                    link: link,
+                    image: img
+                    
                 };
                 articles.push(dataToAdd);
             }
